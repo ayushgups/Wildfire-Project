@@ -84,7 +84,7 @@ cities = [
 ]
 
 land_temp_cities = pd.read_csv(
-    #'GlobalLandTemperaturesByMajorCity.csv filepath',
+    '/Users/AaronLopes/Desktop/datasets/GlobalLandTemperaturesByCity.csv',
     header=0,
     names=[
         'dt',
@@ -102,4 +102,4 @@ land_temp_cities = pd.read_csv(
 cal_temps = land_temp_cities.loc[land_temp_cities['City'].isin(cities)]
 # select rows from LA
 la_temps = cal_temps.loc[cal_temps['City'] == 'Los Angeles']
-la_temps = la_temps.drop('Los Angeles')
+la_temps = la_temps.drop('City', axis=1)
