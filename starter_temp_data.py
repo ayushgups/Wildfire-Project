@@ -103,4 +103,3 @@ cal_temps = land_temp_cities.loc[land_temp_cities['City'].isin(cities)]
 # select rows from LA
 la_temps = cal_temps.loc[cal_temps['City'] == 'Los Angeles']
 la_temps = la_temps.drop('Los Angeles')
-print(la_temps)
