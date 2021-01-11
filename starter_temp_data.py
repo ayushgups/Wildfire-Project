@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.core.numeric import loads
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -84,22 +85,16 @@ cities = [
 ]
 
 land_temp_cities = pd.read_csv(
-    '/Users/AaronLopes/Desktop/datasets/GlobalLandTemperaturesByCity.csv',
-    header=0,
-    names=[
-        'dt',
-        'AverageTemperature',
-        'AverageTemperatureUncertainty',
-        'City',
-        'Country',
-        'Latitude',
-        'Longitude',
-    ],
-    usecols=['dt', 'AverageTemperature', 'City'],
+    '/Users/AaronLopes/datasets/GlobalLandTemperaturesByCity.csv',
 )
 
-# select rows corresponding to california cities
-cal_temps = land_temp_cities.loc[land_temp_cities['City'].isin(cities)]
-# select rows from LA
-la_temps = cal_temps.loc[cal_temps['City'] == 'Los Angeles']
-la_temps = la_temps.drop('City', axis=1)
+# read and transform file
+la_temps = land_temp_cities.loc[land_temp_cities['City'] == 'San Jose', ['dt','AverageTemperature']]
+la_temps.columns = ['Date','Temp']
+la_temps['Date'] = pd.to_datetime(la_temps['Date'])
+la_temps.reset_index(drop=True, inplace=True)
+la_temps.set_index('Date', inplace=True)
+
+# print temp values from year of 2012
+la_temps = la_temps.loc['2012-01-01':'2013-01-01']
+print(la_temps)
