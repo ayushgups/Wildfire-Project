@@ -138,7 +138,7 @@ land_temp_cities = pd.read_csv(
 la_temps = land_temp_cities.loc[land_temp_cities['City'] == 'San Jose', ['dt', 'AverageTemperature']]
 la_temps.columns = ['Date', 'Temp']
 la_temps['Date'] = pd.to_datetime(la_temps['Date'])
-bad_temp = None or la_temps['Temp'] < 0
+bad_temp = la_temps['Temp'] < 0
 la_temps[bad_temp] = 0.0
 # la_temps['Temp'] = (1.8 * la_temps['Temp']) + 32
 la_temps.reset_index(drop=True, inplace=True)
